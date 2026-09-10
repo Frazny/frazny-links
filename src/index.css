@@ -81,6 +81,63 @@ h1 strong { display: block; color: transparent; background: linear-gradient(110d
 footer { width: min(920px, calc(100% - 48px)); margin: 100px auto 0; padding: 28px 0 40px; display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #52525b; font-size: 13px; border-top: 1px solid rgba(255,255,255,.08); }
 .visitor-counter { display: inline-flex; align-items: center; gap: 7px; color: #71717a; }
 .visitor-counter i { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 9px rgba(34,197,94,.8); }
+
+/* ── Elite Visitor Counter ── */
+.visitor-counter-elite {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px 7px 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 99px;
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.07);
+  transition: border-color .3s, box-shadow .3s;
+}
+.visitor-counter-elite:hover {
+  border-color: rgba(34,197,94,.3);
+  box-shadow: 0 4px 28px rgba(34,197,94,.08), inset 0 1px 0 rgba(255,255,255,.09);
+}
+.vc-pulse-wrap {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+.vc-pulse-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(34,197,94,.18);
+  animation: vc-ring 2s ease-out infinite;
+}
+.vc-pulse-dot {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34,197,94,.9);
+}
+@keyframes vc-ring {
+  0%   { transform: scale(1);   opacity: .8; }
+  70%  { transform: scale(2.2); opacity: 0;  }
+  100% { transform: scale(1);   opacity: 0;  }
+}
+.vc-count {
+  font: 700 13px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #f4f4f5;
+  letter-spacing: -.01em;
+  min-width: 2ch;
+  text-align: right;
+}
+.vc-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #52525b;
+  letter-spacing: .04em;
+}
 @media (max-width: 800px) { .hero-card { grid-template-columns: 1fr; } .hero-card::before { display: none; } .hero-copy { padding: 48px 32px 8px; } .spline-wrap { min-height: 400px; } .links-grid { grid-template-columns: 1fr; } .contact-card { align-items: flex-start; flex-direction: column; padding: 32px; } }
 @media (max-width: 520px) { .nav-wrap, .hero, .now-playing-section, .content-section, .contact-section, footer { width: calc(100% - 32px); } .audio-controller { right: 12px; bottom: 12px; } .audio-controller input { width: 72px; } .nav-wrap { gap: 18px; } .hero { margin-top: 24px; } .hero-card { min-height: 680px; } .hero-copy { padding: 40px 24px 0; } h1 { font-size: 52px; } .intro { font-size: 16px; } .spline-wrap { min-height: 360px; margin-top: -10px; } .content-section, .contact-section { margin-top: 88px; } .contact-card { padding: 28px 22px; } .mail-button { width: 100%; } .spotify-card { gap: 12px; padding: 13px; } .spotify-cover { width: 64px; height: 64px; flex-basis: 64px; } .spotify-open { width: 40px; height: 40px; flex-basis: 40px; } footer { margin-top: 72px; flex-wrap: wrap; } .visitor-counter { order: 3; width: 100%; } }
 @media (pointer: fine) {
