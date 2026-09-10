@@ -1,14 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Eye } from 'lucide-react'
 
-const COUNTER_URL = 'https://api.counterapi.dev/v1/frazny-links/visits'
+const COUNTER_KEY = 'frazny-is-a-dev-visits'
+const BASE_URL = 'https://countapi.mileshilliard.com/api/v1'
 const SESSION_KEY = 'frazny-visit-counted-v1'
-
-type CounterResponse = { count?: number; value?: number }
-
-function readCount(data: CounterResponse) {
-  return typeof data.count === 'number' ? data.count : typeof data.value === 'number' ? data.value : null
-}
 
 export function VisitorCounter() {
   const [count, setCount] = useState<number | null>(null)
@@ -18,10 +13,14 @@ export function VisitorCounter() {
 
     const loadCount = async (increment = false) => {
       try {
-        const response = await fetch(`${COUNTER_URL}${increment ? '/up' : ''}`, { cache: 'no-store' })
+        const endpoint = increment ? 'hit' : 'get'
+        const response = await fetch(`${BASE_URL}/${endpoint}/${COUNTER_KEY}`, {
+          cache: 'no-store',
+        })
         if (!response.ok) throw new Error('Sayaç servisine ulaşılamadı')
-        const nextCount = readCount((await response.json()) as CounterResponse)
-        if (active && nextCount !== null) setCount(nextCount)
+        const data = await response.json()
+        const value = parseInt(data.value, 10)
+        if (active && !isNaN(value)) setCount(value)
       } catch {
         // Sayaç servisi geçici olarak kapalıysa site çalışmaya devam eder.
       }
